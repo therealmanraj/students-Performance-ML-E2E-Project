@@ -32,5 +32,5 @@ def predict_datapoint():
         return render_template('home.html',results=results[0])
     
 if __name__ == "__main__":
-    print("Go to http://127.0.0.1:5050/predictData")
-    app.run(port=5050,host="0.0.0.0",debug=True)
+    # print("Go to http://127.0.0.1:5050/predictData")
+    app.run(port=5050,host="0.0.0.0")
