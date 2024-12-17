@@ -26,7 +26,7 @@ def predict_datapoint():
             return render_template('home.html', results=results[0])
     except Exception as e:
         print(f"Error in predict_datapoint: {str(e)}")
-        return f"An error occurred: {str(e)}", 500
+        return f"An error occurred: {str(e)}"
 
 @app.route('/train', methods=['GET', 'POST'])
 def train_model():
@@ -47,7 +47,7 @@ def train_model():
                                model_name=model_name)
     except Exception as e:
         print(f"Error in train_model: {str(e)}")
-        return f"An error occurred during training: {str(e)}", 500
+        return f"An error occurred during training: {str(e)}"
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=8000)
