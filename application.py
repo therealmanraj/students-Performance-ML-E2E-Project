@@ -3,15 +3,13 @@ from flask import Flask,render_template,request
 from sklearn.preprocessing import StandardScaler
 from src.pipeline.predict_pipeline import CustomData,PredictPipeline
 
+from src.pipeline.train_pipeline import TrainPipeline
+
 application=Flask(__name__)
 
 app=application
 
-@app.route('/')
-def index():
-    return render_template('index.html')
-
-@app.route('/predictData',methods=['GET','POST'])
+@app.route('/',methods=['GET','POST'])
 def predict_datapoint():
     if request.method == 'GET':
         return render_template('home.html')
@@ -31,6 +29,23 @@ def predict_datapoint():
         results= predict_pipeline.predict(pred_df)
         return render_template('home.html',results=results[0])
     
+@app.route('/train', methods=['GET', 'POST'])
+def train_model():
+    training_completed = False
+    model_performance = None
+    model_name = None
+    
+    if request.method == 'POST':
+        pipeline = TrainPipeline()
+        model_performance, model_name = pipeline.train()
+        training_completed = True
+    
+    return render_template('train.html', 
+                           training_completed=training_completed,
+                           model_performance=model_performance,
+                           model_name=model_name)
+
+    
 if __name__ == "__main__":
-    # print("Go to http://127.0.0.1:5050/predictData")
+    print("Working")
     app.run(port=5050,host="0.0.0.0")
