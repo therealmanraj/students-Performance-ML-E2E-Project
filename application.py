@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+import traceback
 from src.pipeline.predict_pipeline import CustomData, PredictPipeline
 from src.pipeline.train_pipeline import TrainPipeline
 
@@ -25,8 +26,9 @@ def predict_datapoint():
             results = predict_pipeline.predict(pred_df)
             return render_template('home.html', results=results[0])
     except Exception as e:
-        print(f"Error in predict_datapoint: {str(e)}")
-        return f"An error occurred: {str(e)}"
+        error_trace = traceback.format_exc()
+        print(f"Error in predict_datapoint:\n{error_trace}")
+        return f"An error occurred:\n{error_trace}"
 
 @app.route('/train', methods=['GET', 'POST'])
 def train_model():
@@ -46,8 +48,9 @@ def train_model():
                                model_performance=model_performance,
                                model_name=model_name)
     except Exception as e:
-        print(f"Error in train_model: {str(e)}")
-        return f"An error occurred during training: {str(e)}"
+        error_trace = traceback.format_exc()
+        print(f"Error in train_model:\n{error_trace}")
+        return f"An error occurred during training:\n{error_trace}"
 
 if __name__ == "__main__":
     app.run(debug=False, host="0.0.0.0", port=8000)
