@@ -77,7 +77,7 @@ pip install -r requirements.txt
 You can execute the pipeline using the main script.
 
 ```bash
-python main.py
+python application.py
 ```
 
 ---
