@@ -39,13 +39,15 @@ def train_model():
 
         if request.method == 'POST':
             pipeline = TrainPipeline()
-            model_performance, model_name = pipeline.train()
+            r2_square, mae, rmse, model_name = pipeline.train()
             training_completed = True
-            print(f"Training completed: {model_name}, Performance: {model_performance}")
+            print(f"Training completed: {model_name}, R2: {r2_square}, MAE: {mae}, RMSE: {rmse}")
         
         return render_template('train.html',
                                training_completed=training_completed,
-                               model_performance=model_performance,
+                               r2_square=r2_square,
+                               mae=mae,
+                               rmse=rmse,
                                model_name=model_name)
     except Exception as e:
         error_trace = traceback.format_exc()

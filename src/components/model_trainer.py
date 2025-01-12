@@ -10,7 +10,7 @@ from sklearn.ensemble import (
 )
 
 from sklearn.linear_model import LinearRegression
-from sklearn.metrics import r2_score
+from sklearn.metrics import r2_score, mean_absolute_error, mean_squared_error, root_mean_squared_error
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.tree import DecisionTreeRegressor
 from xgboost import XGBRegressor
@@ -112,7 +112,9 @@ class ModelTrainer:
 
             predicted=best_model.predict(X_test)
             r2_square = r2_score(y_test,predicted)
-
-            return r2_square, best_model
+            mae = mean_absolute_error(y_test,predicted)
+            rmse = root_mean_squared_error(y_test,predicted)
+            
+            return r2_square, mae, rmse, best_model
         except Exception as e:
             raise CustomException(e,sys)

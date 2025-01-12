@@ -25,9 +25,9 @@ class TrainPipeline:
             logging.info("Data Transformation Completed")
 
             print("Starting Model Training Step")
-            model_performance, model_name = self.model_trainer.initiate_model_trainer(train_array, test_array)
-            logging.info(f"Model Training Completed with performance: {model_performance}")
+            r2_square, mae, rmse, model_name = self.model_trainer.initiate_model_trainer(train_array, test_array)
+            logging.info(f"Model Training Completed with performance R2: {r2_square} MAE: {mae} and RMSE: {rmse}")
 
-            return model_performance, model_name
+            return r2_square, mae, rmse, model_name
         except Exception as e:
             raise CustomException(e, sys)

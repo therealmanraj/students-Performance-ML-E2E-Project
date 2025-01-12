@@ -58,7 +58,12 @@
       {% if training_completed %}
       <h1>🎉 Training Complete!</h1>
       <p>Model Name: <strong>{{ model_name }}</strong></p>
-      <p>Model Performance: <strong>{{ model_performance }}</strong></p>
+      <p>
+        Model Performance: <br>
+        <p>R2</p><strong>{{ r2_square }}</strong>
+        <p>MAE</p><strong>{{ mae }}</strong> 
+        <p>RMSE</p><strong>{{ rmse }}</strong>
+      </p>
       <a href="/">Go Back to Home</a>
       {% else %}
       <h1>Train Your Model</h1>
